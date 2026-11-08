@@ -12,6 +12,7 @@ excluded = {
     "book",
     "tmp",
     "test-results",
+    "playwright-report",
     ".venv",
     ".pytest_cache",
     ".ruff_cache",
@@ -30,6 +31,12 @@ with ZipFile(target, "w", ZIP_DEFLATED) as archive:
             or file.name.startswith("page@")
             or file.name == ".env"
             or file.name.startswith(".env.")
+            or relative.as_posix()
+            in {
+                "results/e2e-results.json",
+                "results/python-tests.json",
+                "results/python-tests.txt",
+            }
         ):
             continue
         archive.write(file, Path("argument-lab") / relative)

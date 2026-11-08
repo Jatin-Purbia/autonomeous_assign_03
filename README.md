@@ -4,13 +4,13 @@
 
 A local application for abstract and strategic argumentation, with an interactive attack graph, exact semantics, exhaustive truthfulness checks, seeded experiments, and desktop/mobile browser tests.
 
-Built for college evaluation with separate domain, application, validation, job-management and HTTP layers. See [architecture and readiness](docs/ARCHITECTURE.md) for the module boundaries and engineering decisions.
+Built for college evaluation with separate domain, application, validation, job-management and HTTP layers.
 
 ## Run
 
 Requires Python 3.10+ (tested with 3.12.4). **The application has no external Python dependencies and needs no internet connection.**
 
-Clone the repository first, or extract the submission ZIP:
+Clone the repository:
 
 ```powershell
 git clone https://github.com/Jatin-Purbia/autonomeous_assign_03.git
@@ -65,7 +65,7 @@ npm run test:e2e
 
 The generated HTML report is `playwright-report/index.html`; machine-readable results are `results/e2e-results.json`. Failed tests retain traces and screenshots under `test-results/`. The separate demo recorder captures video. Submitted screenshots are in `docs/screenshots/`.
 
-GitHub Actions runs the Python suite and full saved-result audit on Linux (Python 3.10/3.12) and Windows (Python 3.12), plus desktop/mobile Chromium E2E on Linux. Run artifacts retain the verification output. Local verification is documented in [TESTING.md](TESTING.md); the badge reflects the actual hosted workflow status.
+GitHub Actions runs the Python suite and full saved-result audit on Linux (Python 3.10/3.12) and Windows (Python 3.12), plus desktop/mobile Chromium E2E on Linux. Run artifacts retain verification output; generated test reports are excluded from Git. The verified suite contains 33 Python tests and 24 desktop/mobile browser tests. The badge reflects the actual hosted workflow status.
 
 ## Experiments
 

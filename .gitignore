@@ -17,3 +17,6 @@ htmlcov/
 .ruff_cache/
 *.log
 docs/demonstration/page@*.webm
+results/e2e-results.json
+results/python-tests.json
+results/python-tests.txt
