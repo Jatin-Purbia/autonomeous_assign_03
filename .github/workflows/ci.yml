@@ -1,0 +1,71 @@
+name: Project checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    name: Python ${{ matrix.python }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: '3.10'
+          - os: ubuntu-latest
+            python: '3.12'
+          - os: windows-latest
+            python: '3.12'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Unit, independent oracle, and HTTP integration tests
+        run: python scripts/test_python.py
+      - name: Audit every submitted experimental result
+        run: python scripts/audit_results.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: python-${{ matrix.os }}-${{ matrix.python }}
+          path: |
+            results/python-tests.json
+            results/python-tests.txt
+            results/independent-audit.json
+
+  browser:
+    name: Desktop and mobile Chromium
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: JavaScript syntax
+        run: node --check web/app.js
+      - name: Frontend formatting
+        run: npm run format:check
+      - name: Browser end-to-end tests
+        run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-evidence
+          path: |
+            playwright-report/
+            test-results/
+            results/e2e-results.json
+            docs/screenshots/

@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Argument Lab · Autonomous Systems</title>
+        <link rel="stylesheet" href="/style.css" />
+    </head>
+    <body>
+        <aside class="sidebar">
+            <a class="brand" href="/" aria-label="Argument Lab home"
+                ><span class="logo">a<span>↗</span></span
+                >argument<span class="light">lab</span></a
+            >
+            <div class="workspace">AUTONOMOUS SYSTEMS <span>03</span></div>
+            <nav aria-label="Main navigation">
+                <button class="nav active" data-tab="framework">
+                    <span aria-hidden="true">◈</span> Framework studio</button
+                ><button class="nav" data-tab="strategy">
+                    <span aria-hidden="true">⇄</span> Strategic playground</button
+                ><button class="nav" data-tab="experiments">
+                    <span aria-hidden="true">▥</span> Experiments</button
+                ><button class="nav" data-tab="guide">
+                    <span aria-hidden="true">≡</span> Project guide
+                </button>
+            </nav>
+            <div class="side-bottom">
+                <div class="tiny-label">EXACT BY DESIGN</div>
+                <p>Small graphs.<br />Complete answers.</p>
+                <span class="online-dot"></span> Local Python engine
+                <div class="version">B.Tech project / Assignment 03</div>
+            </div>
+        </aside>
+        <main>
+            <header>
+                <div>
+                    <span class="breadcrumb">REASONING / ARGUMENTATION</span>
+                    <h1 id="page-title">Framework studio</h1>
+                </div>
+                <div class="header-actions">
+                    <span class="local-pill">● LOCAL WORKSPACE</span
+                    ><button id="export" class="button">↓ Export framework</button
+                    ><label class="button" for="import-file">↑ Import</label
+                    ><input id="import-file" type="file" accept="application/json,.json" hidden />
+                </div>
+            </header>
+            <div id="error" class="error" role="alert" hidden></div>
+            <div id="notice" class="notice" role="status" hidden></div>
+            <section id="framework" class="tab-panel">
+                <div class="intro">
+                    <div>
+                        <h2>Make your case.</h2>
+                        <p>Build an attack graph. Explore what survives.</p>
+                    </div>
+                    <span class="chapter">DUNG'S ABSTRACT FRAMEWORK ⟨A, ⇀⟩</span>
+                </div>
+                <div class="studio-grid">
+                    <section class="card editor">
+                        <div class="card-heading">
+                            <h3>01 <span>Define the framework</span></h3>
+                            <span class="tag">EDITABLE</span>
+                        </div>
+                        <label for="example">Start with an example</label
+                        ><select id="example"></select>
+                        <p id="example-description" class="help"></p>
+                        <label for="arguments"
+                            >Arguments <span>comma separated · max 12</span></label
+                        ><input id="arguments" value="a1, a2, a3, a4, a5" /><label for="attacks"
+                            >Attacks <span>one source → target per line</span></label
+                        ><textarea id="attacks" rows="6" spellcheck="false"></textarea
+                        ><button id="analyse" class="button primary full">
+                            Analyse framework <span>↗</span>
+                        </button>
+                        <div class="editor-foot">
+                            Self-attacks and cycles are supported.<br />Click nodes to build the
+                            test set S.
+                        </div>
+                    </section>
+                    <section class="card graph-card">
+                        <div class="card-heading">
+                            <h3>02 <span>The argument graph</span></h3>
+                            <span id="graph-count" class="tag"></span>
+                        </div>
+                        <div class="graph-stage">
+                            <svg
+                                id="graph"
+                                viewBox="0 0 640 340"
+                                role="img"
+                                aria-label="Directed argument attack graph"
+                            ></svg>
+                        </div>
+                        <div class="legend">
+                            <span><i class="dot in"></i>In</span
+                            ><span><i class="dot out"></i>Out</span
+                            ><span><i class="dot undec"></i>Undecided</span
+                            ><span class="legend-note">Grounded labelling · arrow = attacks</span>
+                        </div>
+                        <div class="trace-area">
+                            <span class="tiny-label">LEAST FIXED POINT</span>
+                            <div id="trace"></div>
+                        </div>
+                    </section>
+                </div>
+                <div class="section-title">
+                    <h2>The results, from every angle.</h2>
+                    <span>Exact enumeration · deterministic output</span>
+                </div>
+                <div id="extension-cards" class="extension-grid"></div>
+                <div class="bottom-grid">
+                    <section class="card">
+                        <div class="card-heading">
+                            <h3>03 <span>Inspect a set</span></h3>
+                            <span class="tag">S ⊆ A</span>
+                        </div>
+                        <label for="test-set">Test set S</label
+                        ><input id="test-set" placeholder="e.g. a3, a5" /><button
+                            id="check-set"
+                            class="button small"
+                        >
+                            Check set
+                        </button>
+                        <div id="set-results"></div>
+                        <p class="help">
+                            F(S) contains every argument defended by S, including unattacked
+                            arguments.
+                        </p>
+                    </section>
+                    <section class="card">
+                        <div class="card-heading">
+                            <h3>04 <span>Acceptance status</span></h3>
+                        </div>
+                        <label for="semantics">Evaluate under</label
+                        ><select id="semantics">
+                            <option value="grounded">Grounded</option>
+                            <option value="complete">Complete</option>
+                            <option value="preferred">Preferred</option>
+                            <option value="stable">Stable</option>
+                            <option value="semi-stable">Semi-stable</option>
+                        </select>
+                        <div id="acceptance"></div>
+                        <p class="help">
+                            Skeptical = in every extension; credulous = in some but not all. No
+                            extensions = undefined.
+                        </p>
+                    </section>
+                </div>
+                <section class="card labelling-card">
+                    <div class="card-heading">
+                        <h3>05 <span>All legal labellings</span></h3>
+                        <span id="labelling-count" class="tag"></span>
+                    </div>
+                    <div id="labellings" class="table-wrap"></div>
+                </section>
+            </section>
+            <section id="strategy" class="tab-panel" hidden>
+                <div class="intro">
+                    <div>
+                        <h2>When does hiding pay?</h2>
+                        <p>
+                            Agents reveal subsets of their arguments. Utility counts their own
+                            accepted arguments.
+                        </p>
+                    </div>
+                    <span class="chapter">GROUNDED DIRECT MECHANISM</span>
+                </div>
+                <div class="two-grid">
+                    <section class="card">
+                        <h3>Agent ownership & reports</h3>
+                        <p class="help">
+                            Uses the framework from the studio. Each argument belongs to exactly one
+                            agent. Empty agents are allowed.
+                        </p>
+                        <label for="ownership">Ownership JSON</label
+                        ><textarea id="ownership" rows="7" spellcheck="false"></textarea
+                        ><label for="reports">Revealed reports JSON</label
+                        ><textarea id="reports" rows="7" spellcheck="false"></textarea
+                        ><label for="agent">Agent for best response</label
+                        ><input id="agent" value="x" /><button id="truthful" class="button small">
+                            Reveal all arguments</button
+                        ><button id="run-strategy" class="button primary full">
+                            Evaluate strategy ↗
+                        </button>
+                    </section>
+                    <section>
+                        <div id="strategy-summary" class="card">
+                            <p>
+                                Evaluate a profile to see the grounded outcome and each agent's
+                                utility.
+                            </p>
+                        </div>
+                        <div id="theorems" class="card spaced"></div>
+                    </section>
+                </div>
+                <section class="card spaced">
+                    <div class="card-heading">
+                        <h3>Best responses</h3>
+                        <span class="tag">ALL SUBSETS</span>
+                    </div>
+                    <p class="help">
+                        Other agents' reports stay fixed. Tied reports are all returned as best
+                        responses.
+                    </p>
+                    <div id="best-responses" class="table-wrap"></div>
+                </section>
+            </section>
+            <section id="experiments" class="tab-panel" hidden>
+                <div class="intro">
+                    <div>
+                        <h2>From theorem to evidence.</h2>
+                        <p>Three agents. Random attacks. Every possible deviation checked.</p>
+                    </div>
+                    <span class="chapter">REPRODUCIBLE MONTE CARLO</span>
+                </div>
+                <section class="card">
+                    <div class="experiment-controls">
+                        <div>
+                            <label for="count">Instances per probability</label
+                            ><input id="count" type="number" min="1" max="1000" value="1000" />
+                        </div>
+                        <div>
+                            <label for="probabilities">Attack probabilities</label
+                            ><input id="probabilities" value="0.1, 0.3, 0.5, 0.7, 0.9" />
+                        </div>
+                        <div>
+                            <label for="seed">Random seed</label
+                            ><input id="seed" type="number" value="2026" />
+                        </div>
+                    </div>
+                    <label class="checkbox"
+                        ><input id="self-attacks" type="checkbox" /> Include self-attacks in
+                        sampling</label
+                    >
+                    <div class="action-row">
+                        <button id="run-experiments" class="button primary">
+                            Run experiments ↗</button
+                        ><button id="load-results" class="button">
+                            Load submitted 5,000 trials</button
+                        ><button id="download-results" class="button" disabled>
+                            ↓ Download results JSON
+                        </button>
+                    </div>
+                    <p class="help">
+                        6–8 arguments; independent attack probability p; random ownership
+                        conditioned on three nonempty agents. Default excludes self-attacks.
+                        Condition uses odd directed walks, including odd cycles back to the source.
+                    </p>
+                    <div id="experiment-progress" role="status"></div>
+                </section>
+                <div id="experiment-results" class="spaced"></div>
+            </section>
+            <section id="guide" class="tab-panel" hidden>
+                <div class="intro">
+                    <div>
+                        <h2>A lab you can explain.</h2>
+                        <p>Definitions, methodology, and a presentation-ready walkthrough.</p>
+                    </div>
+                </div>
+                <div class="two-grid">
+                    <article class="card prose">
+                        <h3>The reasoning pipeline</h3>
+                        <p><b>Conflict-free:</b> no attack has both endpoints in S.</p>
+                        <p>
+                            <b>Defence:</b> S attacks every attacker of the argument. No attackers
+                            means automatic defence.
+                        </p>
+                        <p><b>Characteristic function F(S):</b> all arguments defended by S.</p>
+                        <p>
+                            <b>Admissible:</b> conflict-free and S ⊆ F(S).
+                            <b>Complete:</b> conflict-free and S = F(S).
+                        </p>
+                        <p>
+                            <b>Grounded:</b> iterate F from ∅ until unchanged.
+                            <b>Preferred:</b> inclusion-maximal complete sets.
+                        </p>
+                        <p>
+                            <b>Stable:</b> conflict-free and attacks all outside arguments.
+                            <b>Semi-stable:</b> complete with inclusion-maximal range S ∪ S⁺.
+                        </p>
+                        <h3>Two separate checks</h3>
+                        <p>
+                            Theorem 5.3 exhaustively checks truthfulness against every combination
+                            of other reports. Theorem 5.4's structural condition is sufficient; its
+                            failure alone does not establish manipulation.
+                        </p>
+                        <p>
+                            The parity search explores at most 2|A| states per source. It allows
+                            repeated vertices and includes odd self-return walks. This conservative
+                            cycle convention is recorded with every result.
+                        </p>
+                    </article>
+                    <article class="card prose">
+                        <h3>Five-minute demonstration</h3>
+                        <ol>
+                            <li>
+                                Load Book Figure 5.1. Inspect grounded iterations ∅ → {a3,a5} →
+                                {a1,a3,a5}.
+                            </li>
+                            <li>Test S = {a3,a5}: admissible, but incomplete.</li>
+                            <li>
+                                Load Book Figure 5.2. Compare its three complete extensions and
+                                legal labellings.
+                            </li>
+                            <li>
+                                Load Book Example 5.10. Open Strategic playground; evaluate full
+                                reports. Hide a1 for x; its utility increases from 1 to 2.
+                            </li>
+                            <li>
+                                Load Book Example 5.11. a6 attacks a3 and removes the incentive to
+                                hide. The structural condition still fails.
+                            </li>
+                            <li>
+                                Load the submitted experiments. Inspect fractions and individual
+                                saved graphs; export the raw evidence.
+                            </li>
+                        </ol>
+                        <h3>Book errata applied</h3>
+                        <p>
+                            Example 5.10: y owns a2 and has utility 0; z owns a3 and has utility 1
+                            under full reports. Example 5.11: <b>a6</b> cancels the indirect
+                            self-defeat.
+                        </p>
+                        <p class="help">
+                            Reference: supplied Multiagent Systems textbook, Chapter 5, pp. 181–185
+                            and 199–201. Full documentation is in README.md, REPORT.md and
+                            DEMONSTRATION.md.
+                        </p>
+                    </article>
+                </div>
+            </section>
+            <footer>
+                ARGUMENT LAB <span>Autonomous Systems · Assignment 03</span
+                ><span>Finite graphs. Transparent reasoning.</span>
+            </footer>
+        </main>
+        <script src="/app.js" defer></script>
+    </body>
+</html>

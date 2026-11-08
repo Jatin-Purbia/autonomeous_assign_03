@@ -1,0 +1,38 @@
+test_cross_origin_rejected (test_api.APITests.test_cross_origin_rejected) ... ok
+test_experiment_bad_config (test_api.APITests.test_experiment_bad_config) ... ok
+test_experiment_job (test_api.APITests.test_experiment_job) ... ok
+test_explicit_false_boolean_is_not_coerced_from_a_string (test_api.APITests.test_explicit_false_boolean_is_not_coerced_from_a_string) ... ok
+test_health_and_response_headers (test_api.APITests.test_health_and_response_headers) ... ok
+test_malformed_json_and_content_type (test_api.APITests.test_malformed_json_and_content_type) ... ok
+test_payload_limit_and_unknown_routes (test_api.APITests.test_payload_limit_and_unknown_routes) ... ok
+test_semantics_route (test_api.APITests.test_semantics_route) ... ok
+test_static_and_404 (test_api.APITests.test_static_and_404) ... ok
+test_strategic_route (test_api.APITests.test_strategic_route) ... ok
+test_validation_returns_400 (test_api.APITests.test_validation_returns_400) ... ok
+test_wrong_json_shapes_return_400_without_dropping_connection (test_api.APITests.test_wrong_json_shapes_return_400_without_dropping_connection) ... ok
+test_example_510_corrected_utilities (test_engine.BookTests.test_example_510_corrected_utilities) ... ok
+test_example_511_all_profiles (test_engine.BookTests.test_example_511_all_profiles) ... ok
+test_examples_55_56_58 (test_engine.BookTests.test_examples_55_56_58) ... ok
+test_examples_57_58 (test_engine.BookTests.test_examples_57_58) ... ok
+test_cycle_parity_witness (test_engine.EdgeCaseTests.test_cycle_parity_witness) ... ok
+test_empty_framework_and_empty_agent (test_engine.EdgeCaseTests.test_empty_framework_and_empty_agent) ... ok
+test_functional_entry_points (test_engine.EdgeCaseTests.test_functional_entry_points) ... ok
+test_self_attack_and_no_stable (test_engine.EdgeCaseTests.test_self_attack_and_no_stable) ... ok
+test_tied_best_responses (test_engine.EdgeCaseTests.test_tied_best_responses) ... ok
+test_validation (test_engine.EdgeCaseTests.test_validation) ... ok
+test_all_512_three_node_graphs_against_independent_labellings (test_engine.ExhaustiveOracleTests.test_all_512_three_node_graphs_against_independent_labellings) ... ok
+test_experiment_reproducibility (test_engine.ExhaustiveOracleTests.test_experiment_reproducibility) ... ok
+test_strategyproofness_on_every_three_node_graph (test_engine.ExhaustiveOracleTests.test_strategyproofness_on_every_three_node_graph) ... ok
+test_completed_jobs_are_bounded_and_snapshots_are_isolated (test_webapp.JobLifecycleTests.test_completed_jobs_are_bounded_and_snapshots_are_isolated) ... ok
+test_failed_job_is_terminal_and_does_not_block_next_run (test_webapp.JobLifecycleTests.test_failed_job_is_terminal_and_does_not_block_next_run) ... ok
+test_one_running_job_and_progress_visibility (test_webapp.JobLifecycleTests.test_one_running_job_and_progress_visibility) ... ok
+test_servers_have_independent_job_state (test_webapp.JobLifecycleTests.test_servers_have_independent_job_state) ... ok
+test_job_parameters_reject_invalid_types_and_ranges (test_webapp.ServiceTests.test_job_parameters_reject_invalid_types_and_ranges) ... ok
+test_serialized_acceptance_matches_selected_extensions (test_webapp.ServiceTests.test_serialized_acceptance_matches_selected_extensions) ... ok
+test_strategy_uses_explicit_other_reports (test_webapp.ServiceTests.test_strategy_uses_explicit_other_reports) ... ok
+test_validated_request_is_immutable (test_webapp.ServiceTests.test_validated_request_is_immutable) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 1.831s
+
+OK
