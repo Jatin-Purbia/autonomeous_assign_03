@@ -1,2 +1,0 @@
-# Optional authoring/formatting tools. The app and unittest suite need neither.
-black==24.4.2
