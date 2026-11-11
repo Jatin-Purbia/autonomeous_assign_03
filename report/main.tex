@@ -52,7 +52,7 @@
 \newcommand{\file}[1]{\texttt{#1}}
 
 \title{Argument Lab: Exact Abstract Argumentation and\\Strategic Argument Revelation}
-\author{Jatin Purbia\\[0.3em]\normalsize Autonomous Systems --- Assignment 03}
+\author{Jatin Purbia (B23CH1022) \and Sharana Gouda Lakshetty (B23CH1042)\\[0.5em]\normalsize Autonomous Systems --- Assignment 03}
 \date{\today}
 
 \begin{document}
@@ -217,34 +217,7 @@ Route & Purpose \\
 The application has no third-party Python dependency, no external API and needs no internet connection. It is intended for a trusted local workstation: payload size, graph size and experiment size are bounded, and write routes reject cross-origin browser requests.
 
 \subsection{User interface}
-The interface has three workspaces, each fitting on one screen on a desktop display (Figures~\ref{fig:ui-framework}--\ref{fig:ui-experiments}); on narrow screens the sections stack. The \emph{Framework studio} combines an editor, an interactive attack graph coloured by the grounded labelling, a quick check of an arbitrary set $S$, and tabs for extensions, acceptance status and labellings. The \emph{Strategic playground} shows each agent's arguments as toggles for hiding or revealing, and presents the utilities, both theorem verdicts and the full best-response table. The \emph{Experiments} workspace runs or loads experiments and shows summaries and individual instances.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{desktop-studio.png}
-\caption{Framework studio on Book Figure~5.1: editor (left), attack graph with grounded colouring and set check (centre), results (right).}
-\label{fig:ui-framework}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{strategic-hiding.png}
-\caption{Strategic playground on Book Example~5.10 after agent $x$ hides $a_1$: its utility rises from 1 to 2, so the mechanism is reported as manipulable together with a plain-language witness.}
-\label{fig:ui-strategy}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{experiments.png}
-\caption{Experiments workspace showing the submitted 5{,}000 trials.}
-\label{fig:ui-experiments}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[height=0.42\textheight]{mobile-studio.png}
-\caption{The same studio on a phone-sized viewport (top part of the page shown).}
-\end{figure}
+The interface has three workspaces, each fitting on one screen on a desktop display; on narrow screens the sections stack. The \emph{Framework studio} combines an editor, an interactive attack graph coloured by the grounded labelling, a quick check of an arbitrary set $S$, and tabs for extensions, acceptance status and labellings. The \emph{Strategic playground} shows each agent's arguments as toggles for hiding or revealing, and presents the utilities, both theorem verdicts and the full best-response table. The \emph{Experiments} workspace runs or loads experiments and shows summaries and individual instances.
 
 % =====================================================================
 \section{Validation on the textbook examples}
