@@ -15,7 +15,6 @@ python server.py
 Open **http://127.0.0.1:8000** in your browser. Stop with Ctrl+C.
 
 - Port in use: `python server.py --port 8001`
-- Windows shortcut: double-click `run.bat`
 
 ## Run the tests
 
@@ -40,8 +39,10 @@ npm run test:e2e
 argumentation/   Python engine, strategy, experiments, web API layers
 web/             Browser app (src/), Playwright tests, Node tooling
 tests/           Python tests
-scripts/         Result audit, report generator
+scripts/         Result audit, Python test runner
 results/         Saved experiment data
-docs/            Report, demo guide, screenshots, demo video
+docs/            Architecture, screenshots, demo video
 server.py        Entry point
 ```
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how the pieces fit together.
