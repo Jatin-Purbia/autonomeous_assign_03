@@ -58,19 +58,29 @@
 % ---------------------------- title page ----------------------------
 \begin{titlepage}
 \centering
-\vspace*{2.5cm}
+\vspace*{0.5cm}
 
-{\large\scshape Autonomous Systems}\\[0.4em]
+{\large\scshape Autonomous Systems}\\[0.3em]
 {\large Assignment 03}
 
-\vspace{1.6cm}
-\rule{0.8\textwidth}{0.8pt}\\[1.2em]
-{\fontsize{26}{32}\selectfont\bfseries Argument Lab}\\[0.8em]
-{\Large Exact Abstract Argumentation and\\[0.3em]Strategic Argument Revelation}\\[1.2em]
+\vspace{1.0cm}
+\rule{0.8\textwidth}{0.8pt}\\[1em]
+{\fontsize{26}{32}\selectfont\bfseries Argument Lab}\\[0.7em]
+{\Large Exact Abstract Argumentation and\\[0.3em]Strategic Argument Revelation}\\[1em]
 \rule{0.8\textwidth}{0.8pt}
 
-\vspace{1.2cm}
+\vspace{0.6cm}
 {\large\itshape A project report}
+
+\vfill
+
+% the abstract lives on the first page only
+\begin{minipage}{0.9\textwidth}
+\centering\textbf{\large Abstract}\par\vspace{0.6em}
+\small\raggedright\setlength{\parindent}{0pt}\setlength{\parskip}{0pt}
+\noindent
+This report describes \emph{Argument Lab}, a local application for abstract argumentation and for the strategic question of whether an agent can profit from hiding arguments. The system implements Dung's abstract argumentation frameworks with exact enumeration of the grounded, complete, preferred, stable and semi-stable semantics, legal labellings and acceptance status. On top of that it implements the grounded direct mechanism of Chapter~5 of \emph{Multiagent Systems} (Weiss, 2013): best responses, an exhaustive check of strategyproofness (Theorem~5.3) and a separate check of the structural sufficient condition (Theorem~5.4). We validate the implementation against the textbook examples and against independent oracles over all 512 directed three-node graphs, and we run a seeded experiment of 5{,}000 random three-agent instances. Of these, 1{,}054 are strategyproof; the fraction falls from 83.7\% at attack probability $p=0.1$ to 0.1\% at $p=0.9$. The structural condition held in 285 instances and \emph{every} one of them was strategyproof, while 769 further instances were strategyproof although the condition failed. An independent audit confirmed all 5{,}000 decisions.
+\end{minipage}
 
 \vfill
 
@@ -80,18 +90,13 @@
   Sharana Gouda Lakshetty & & B23CH1042\\
 \end{tabular}
 
-\vspace{2cm}
+\vspace{1cm}
 {\large \today}
 
-\vspace*{1.5cm}
+\vspace*{0.5cm}
 \end{titlepage}
 
 % ------------------- contents start on the second page -------------------
-\begin{abstract}
-\noindent
-This report describes \emph{Argument Lab}, a local application for abstract argumentation and for the strategic question of whether an agent can profit from hiding arguments. The system implements Dung's abstract argumentation frameworks with exact enumeration of the grounded, complete, preferred, stable and semi-stable semantics, legal labellings and acceptance status. On top of that it implements the grounded direct mechanism of Chapter~5 of \emph{Multiagent Systems} (Weiss, 2013): best responses, an exhaustive check of strategyproofness (Theorem~5.3) and a separate check of the structural sufficient condition (Theorem~5.4). We validate the implementation against the textbook examples and against independent oracles over all 512 directed three-node graphs, and we run a seeded experiment of 5{,}000 random three-agent instances. Of these, 1{,}054 are strategyproof; the fraction falls from 83.7\% at attack probability $p=0.1$ to 0.1\% at $p=0.9$. The structural condition held in 285 instances and \emph{every} one of them was strategyproof, while 769 further instances were strategyproof although the condition failed. An independent audit confirmed all 5{,}000 decisions.
-\end{abstract}
-
 \tableofcontents
 \newpage
 
