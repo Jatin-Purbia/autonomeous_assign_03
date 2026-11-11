@@ -51,13 +51,42 @@
 \newcommand{\attacks}{\rightharpoonup}
 \newcommand{\file}[1]{\texttt{#1}}
 
-\title{Argument Lab: Exact Abstract Argumentation and\\Strategic Argument Revelation}
-\author{Jatin Purbia (B23CH1022) \and Sharana Gouda Lakshetty (B23CH1042)\\[0.5em]\normalsize Autonomous Systems --- Assignment 03}
-\date{\today}
+\hypersetup{pdftitle={Argument Lab: Exact Abstract Argumentation and Strategic Argument Revelation},pdfauthor={Jatin Purbia, Sharana Gouda Lakshetty}}
 
 \begin{document}
-\maketitle
 
+% ---------------------------- title page ----------------------------
+\begin{titlepage}
+\centering
+\vspace*{2.5cm}
+
+{\large\scshape Autonomous Systems}\\[0.4em]
+{\large Assignment 03}
+
+\vspace{1.6cm}
+\rule{0.8\textwidth}{0.8pt}\\[1.2em]
+{\fontsize{26}{32}\selectfont\bfseries Argument Lab}\\[0.8em]
+{\Large Exact Abstract Argumentation and\\[0.3em]Strategic Argument Revelation}\\[1.2em]
+\rule{0.8\textwidth}{0.8pt}
+
+\vspace{1.2cm}
+{\large\itshape A project report}
+
+\vfill
+
+\begin{tabular}{@{}ll@{\hspace{2.5em}}l@{}}
+  \textbf{Name} & & \textbf{Roll number}\\[0.4em]
+  Jatin Purbia & & B23CH1022\\
+  Sharana Gouda Lakshetty & & B23CH1042\\
+\end{tabular}
+
+\vspace{2cm}
+{\large \today}
+
+\vspace*{1.5cm}
+\end{titlepage}
+
+% ------------------- contents start on the second page -------------------
 \begin{abstract}
 \noindent
 This report describes \emph{Argument Lab}, a local application for abstract argumentation and for the strategic question of whether an agent can profit from hiding arguments. The system implements Dung's abstract argumentation frameworks with exact enumeration of the grounded, complete, preferred, stable and semi-stable semantics, legal labellings and acceptance status. On top of that it implements the grounded direct mechanism of Chapter~5 of \emph{Multiagent Systems} (Weiss, 2013): best responses, an exhaustive check of strategyproofness (Theorem~5.3) and a separate check of the structural sufficient condition (Theorem~5.4). We validate the implementation against the textbook examples and against independent oracles over all 512 directed three-node graphs, and we run a seeded experiment of 5{,}000 random three-agent instances. Of these, 1{,}054 are strategyproof; the fraction falls from 83.7\% at attack probability $p=0.1$ to 0.1\% at $p=0.9$. The structural condition held in 285 instances and \emph{every} one of them was strategyproof, while 769 further instances were strategyproof although the condition failed. An independent audit confirmed all 5{,}000 decisions.
