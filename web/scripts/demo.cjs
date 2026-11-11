@@ -45,7 +45,7 @@ const docs = (file) => path.join(ROOT, 'docs', file);
       await page.waitForTimeout(2200);
     };
     await page.goto('http://127.0.0.1:8138/');
-    await page.locator('#graph-count').filter({ hasText: '5 NODES / 4 ATTACKS' }).waitFor();
+    await page.locator('#graph-count').filter({ hasText: '5 arguments · 4 attacks' }).waitFor();
     await caption('Argument Lab | Autonomous Systems Assignment 03');
     await page.locator('#example').selectOption('book-5.1');
     await page.waitForTimeout(500);
@@ -54,10 +54,8 @@ const docs = (file) => path.join(ROOT, 'docs', file);
     );
     await page.locator('#test-set').fill('a3, a5');
     await page.locator('#check-set').click();
-    await page.locator('#set-results').scrollIntoViewIfNeeded();
     await caption('S = {a3, a5} is admissible but incomplete: it also defends a1.');
     await page.locator('#example').selectOption('book-5.2');
-    await page.locator('#extension-cards').scrollIntoViewIfNeeded();
     await caption(
       'Figure 5.2: three complete extensions, two preferred extensions, and three legal labellings.',
     );
@@ -66,10 +64,7 @@ const docs = (file) => path.join(ROOT, 'docs', file);
     await page.locator('#run-strategy').click();
     await page.locator('#strategy-summary .metric').waitFor();
     await caption('Example 5.10: under full revelation, utilities are x = 1, y = 0, z = 1.');
-    await page
-      .locator('#reports')
-      .fill(JSON.stringify({ x: ['a4', 'a5'], y: ['a2'], z: ['a3'] }, null, 2));
-    await page.locator('#run-strategy').click();
+    await page.locator('.chip[data-agent="x"][data-arg="a1"]').click();
     await page.waitForTimeout(500);
     await caption(
       'When x hides a1, its utility increases from 1 to 2. The mechanism returns a profitable-deviation witness.',
@@ -86,11 +81,11 @@ const docs = (file) => path.join(ROOT, 'docs', file);
     await page.locator('[data-tab="experiments"]').click();
     await page.locator('#load-results').click();
     await page.locator('.bar-row').first().waitFor();
-    await page.locator('#experiment-results').scrollIntoViewIfNeeded();
     await caption(
       '5,000 seeded instances: no violations of the sufficient condition. Download every graph and audit witness.',
     );
     await page.screenshot({ path: docs('screenshots/experiments.png'), fullPage: true });
+    await page.getByRole('button', { name: 'Inspect instances' }).click();
     await page.locator('#trial-category').selectOption('all');
     await page.locator('#open-trial').click();
     await page.waitForTimeout(500);
