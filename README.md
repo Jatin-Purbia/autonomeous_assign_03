@@ -50,6 +50,7 @@ The suite checks the textbook and edge cases, API validation, independent total-
 For browser tests, install Node.js 20+ and run:
 
 ```powershell
+cd web
 npm ci
 npx playwright install chromium
 npm run test:e2e
@@ -63,7 +64,7 @@ $env:E2E_BROWSER_PATH = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedg
 npm run test:e2e
 ```
 
-The generated HTML report is `playwright-report/index.html`; machine-readable results are `results/e2e-results.json`. Failed tests retain traces and screenshots under `test-results/`. The separate demo recorder captures video. Submitted screenshots are in `docs/screenshots/`.
+The generated HTML report is `web/playwright-report/index.html`; machine-readable results are `web/test-results/e2e-results.json`. Failed tests retain traces and screenshots under `web/test-results/`. The separate demo recorder captures video. Submitted screenshots are in `docs/screenshots/`.
 
 GitHub Actions runs the Python suite and full saved-result audit on Linux (Python 3.10/3.12) and Windows (Python 3.12), plus desktop/mobile Chromium E2E on Linux. Run artifacts retain verification output; generated test reports are excluded from Git. The verified suite contains 33 Python tests and 24 desktop/mobile browser tests. The badge reflects the actual hosted workflow status.
 
@@ -126,8 +127,8 @@ Functional entry points for each extension type are also available in `argumenta
 | Theorem 5.4 condition / cycles | `theorem_54_condition` |
 | Random instances / results | `experiments.py`, `results/` |
 | Textbook tests | `BookTests` in `tests/test_engine.py` |
-| E2E | `tests/e2e/application.spec.js` |
-| Report / demonstration | `REPORT.md`, `output/pdf/assignment-03-report.pdf`, `DEMONSTRATION.md`, `docs/demonstration/argument-lab-demo.webm` |
+| E2E | `web/tests/e2e/application.spec.js` |
+| Report / demonstration | `docs/REPORT.md`, `docs/assignment-03-report.pdf`, `docs/DEMONSTRATION.md`, `docs/demonstration/argument-lab-demo.webm` |
 
 ## Design conventions and limits
 
@@ -155,16 +156,19 @@ Related primary source: Rahwan and Larson, [Mechanism Design for Abstract Argume
 ```text
 argumentation/       Pure Python engine, strategy, fixtures, functional API, experiments
   webapp/            HTTP adapter, request validation, use-case services, isolated jobs
-web/                Accessible HTML/CSS/JavaScript browser application
+web/                Self-contained browser app: Node tooling lives here
+  src/              Accessible HTML/CSS/JavaScript served by server.py
+  tests/e2e/        Desktop/mobile Playwright tests
+  scripts/          Demo video recorder
+  package.json      Playwright + Prettier (dev tooling only)
 server.py           CLI entry point and local-server launch
-tests/              Unit/API tests and desktop/mobile Playwright E2E tests
-scripts/            Independent result audit, demo recorder, report generator
+tests/              Python unit/API tests
+scripts/            Independent result audit, Python test runner, report generator
 results/            Raw experiments, summaries, case notes, test evidence
-docs/               Screenshots and recorded demonstration
-output/pdf/         Submission report
+docs/               Report (md + pdf), demo guide, screenshots, recorded demonstration
 .github/workflows/  Cross-platform Python checks and browser E2E CI
 ```
 
-To regenerate the demonstration, run `npm run demo` after installing Playwright. Report regeneration uses `python scripts/build_report.py` and requires `reportlab`; it does not affect application dependencies.
+To regenerate the demonstration, run `npm run demo` from `web/` after installing Playwright. Report regeneration uses `python scripts/build_report.py` and requires `reportlab`; it does not affect application dependencies.
 
-Optional developer tools: `python -m pip install -r requirements-dev.txt`. Format Python with `python -m black argumentation server.py tests scripts` and frontend sources with `npm run format`. `npm run format:check` verifies the frontend conventions without rewriting files. These tools are optional for running the app and Python tests.
+Optional developer tools: `python -m pip install -r requirements-dev.txt`. Format Python with `python -m black argumentation server.py tests scripts` and frontend sources with `npm run format` (in `web/`). `npm run format:check` verifies the frontend conventions without rewriting files. These tools are optional for running the app and Python tests.

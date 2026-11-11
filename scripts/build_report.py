@@ -6,7 +6,6 @@ from pathlib import Path
 from xml.sax.saxutils import escape
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.enums import TA_LEFT
 from reportlab.lib.units import mm
 from reportlab.platypus import (
     SimpleDocTemplate,
@@ -16,7 +15,6 @@ from reportlab.platypus import (
     TableStyle,
     PageBreak,
     Image,
-    KeepTogether,
 )
 from reportlab.graphics.shapes import Drawing, Rect, String
 
@@ -63,7 +61,7 @@ def chart():
 
 
 def main():
-    output = ROOT / "output/pdf/assignment-03-report.pdf"
+    output = ROOT / "docs/assignment-03-report.pdf"
     output.parent.mkdir(parents=True, exist_ok=True)
     styles = getSampleStyleSheet()
     styles.add(
@@ -176,7 +174,7 @@ def main():
         )
     )
     story.append(PageBreak())
-    text = (ROOT / "REPORT.md").read_text(encoding="utf-8")
+    text = (ROOT / "docs/REPORT.md").read_text(encoding="utf-8")
     blocks = re.split(r"\n\s*\n", text)
     for block in blocks:
         block = block.strip()

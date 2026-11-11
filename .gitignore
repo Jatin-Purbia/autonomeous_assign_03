@@ -1,10 +1,10 @@
 __pycache__/
 *.pyc
-node_modules/
+web/node_modules/
 .npm-cache/
 tmp/
-test-results/
-playwright-report/
+web/test-results/
+web/playwright-report/
 .venv/
 book/
 submission/
@@ -17,6 +17,5 @@ htmlcov/
 .ruff_cache/
 *.log
 docs/demonstration/page@*.webm
-results/e2e-results.json
 results/python-tests.json
 results/python-tests.txt

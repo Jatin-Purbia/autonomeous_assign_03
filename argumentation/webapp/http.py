@@ -84,7 +84,7 @@ class Handler(BaseHTTPRequestHandler):
             )
         if path not in STATIC_ROUTES:
             return self.send_json({"error": "Not found."}, 404)
-        file = self.server.root / "web" / STATIC_ROUTES[path]
+        file = self.server.root / "web" / "src" / STATIC_ROUTES[path]
         content_type = mimetypes.guess_type(str(file))[0] or "text/plain"
         self._send(file.read_bytes(), content_type + "; charset=utf-8")
 
@@ -99,9 +99,10 @@ class Handler(BaseHTTPRequestHandler):
             length = int(self.headers.get("Content-Length", 0))
             if not 0 < length <= MAX_REQUEST_BYTES:
                 raise ValueError(f"Request must be 1-{MAX_REQUEST_BYTES} bytes.")
+            body = self.rfile.read(length)  # always drain so early errors don't reset the socket
             if self.headers.get_content_type() != "application/json":
                 raise ValueError("Use application/json.")
-            data = json.loads(self.rfile.read(length))
+            data = json.loads(body)
             if not isinstance(data, dict):
                 raise ValueError("Expected a JSON object.")
             if self.path == "/api/experiments":

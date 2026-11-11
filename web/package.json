@@ -1,5 +1,5 @@
 {
-  "name": "argument-lab",
+  "name": "argument-lab-web",
   "version": "1.0.0",
   "private": true,
   "engines": {
@@ -7,13 +7,11 @@
   },
   "description": "Autonomous Systems assignment 03: exact argumentation and strategic reporting lab",
   "scripts": {
-    "start": "python server.py",
-    "test": "python -m unittest discover -s tests -v",
     "test:e2e": "playwright test",
     "test:e2e:report": "playwright show-report",
     "demo": "node scripts/demo.cjs",
-    "format": "prettier --write web tests/e2e playwright.config.js scripts/demo.cjs package.json .github/workflows/ci.yml",
-    "format:check": "prettier --check web tests/e2e playwright.config.js scripts/demo.cjs package.json .github/workflows/ci.yml"
+    "format": "prettier --write src tests scripts playwright.config.js package.json",
+    "format:check": "prettier --check src tests scripts playwright.config.js package.json"
   },
   "devDependencies": {
     "@playwright/test": "^1.65.0",

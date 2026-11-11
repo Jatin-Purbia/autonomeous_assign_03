@@ -5,7 +5,7 @@
 - Recorded real browser walkthrough: `docs/demonstration/argument-lab-demo.webm`.
 - Screenshots: `docs/screenshots/desktop-studio.png`, `mobile-studio.png`, `strategic-hiding.png`, `experiments.png`.
 - Live app: `python server.py`, then http://127.0.0.1:8000.
-- Regenerate video: `npm ci`, `npx playwright install chromium`, `npm run demo`.
+- Regenerate video: `cd web`, `npm ci`, `npx playwright install chromium`, `npm run demo`.
 
 The video is a 28.8-second overview with on-screen explanations and no audio. The following script supplies speaking notes for a live 5–7 minute demonstration.
 

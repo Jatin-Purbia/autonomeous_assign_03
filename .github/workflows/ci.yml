@@ -52,20 +52,25 @@ jobs:
         with:
           node-version: '22'
           cache: npm
+          cache-dependency-path: web/package-lock.json
       - run: npm ci
+        working-directory: web
       - run: npx playwright install --with-deps chromium
+        working-directory: web
       - name: JavaScript syntax
-        run: node --check web/app.js
+        run: node --check src/app.js
+        working-directory: web
       - name: Frontend formatting
         run: npm run format:check
+        working-directory: web
       - name: Browser end-to-end tests
         run: npm run test:e2e
+        working-directory: web
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: browser-evidence
           path: |
-            playwright-report/
-            test-results/
-            results/e2e-results.json
+            web/playwright-report/
+            web/test-results/
             docs/screenshots/

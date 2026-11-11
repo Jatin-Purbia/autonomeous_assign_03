@@ -3,8 +3,11 @@ const { chromium } = require('@playwright/test');
 const { spawn } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
+const ROOT = path.resolve(__dirname, '..', '..');
+const docs = (file) => path.join(ROOT, 'docs', file);
 (async () => {
   const server = spawn('python', ['server.py', '--port', '8138'], {
+    cwd: ROOT,
     stdio: 'ignore',
     windowsHide: true,
   });
@@ -16,14 +19,14 @@ const path = require('node:path');
       } catch {}
       await new Promise((r) => setTimeout(r, 200));
     }
-    fs.mkdirSync('docs/demonstration', { recursive: true });
+    fs.mkdirSync(docs('demonstration'), { recursive: true });
     browser = await chromium.launch({
       headless: true,
       ...(process.env.E2E_BROWSER_PATH ? { executablePath: process.env.E2E_BROWSER_PATH } : {}),
     });
     context = await browser.newContext({
       viewport: { width: 1440, height: 1000 },
-      recordVideo: { dir: 'docs/demonstration', size: { width: 1440, height: 1000 } },
+      recordVideo: { dir: docs('demonstration'), size: { width: 1440, height: 1000 } },
     });
     const page = await context.newPage();
     page.setDefaultTimeout(20000);
@@ -71,7 +74,7 @@ const path = require('node:path');
     await caption(
       'When x hides a1, its utility increases from 1 to 2. The mechanism returns a profitable-deviation witness.',
     );
-    await page.screenshot({ path: 'docs/screenshots/strategic-hiding.png', fullPage: true });
+    await page.screenshot({ path: docs('screenshots/strategic-hiding.png'), fullPage: true });
     await page.locator('[data-tab="framework"]').click();
     await page.locator('#example').selectOption('book-5.11');
     await page.locator('[data-tab="strategy"]').click();
@@ -87,7 +90,7 @@ const path = require('node:path');
     await caption(
       '5,000 seeded instances: no violations of the sufficient condition. Download every graph and audit witness.',
     );
-    await page.screenshot({ path: 'docs/screenshots/experiments.png', fullPage: true });
+    await page.screenshot({ path: docs('screenshots/experiments.png'), fullPage: true });
     await page.locator('#trial-category').selectOption('all');
     await page.locator('#open-trial').click();
     await page.waitForTimeout(500);
@@ -97,9 +100,9 @@ const path = require('node:path');
     const video = page.video();
     await context.close();
     context = null;
-    await video.saveAs('docs/demonstration/argument-lab-demo.webm');
+    await video.saveAs(docs('demonstration/argument-lab-demo.webm'));
     const original = await video.path();
-    if (path.resolve(original) !== path.resolve('docs/demonstration/argument-lab-demo.webm'))
+    if (path.resolve(original) !== path.resolve(docs('demonstration/argument-lab-demo.webm')))
       fs.unlinkSync(original);
     console.log('Saved docs/demonstration/argument-lab-demo.webm');
   } finally {

@@ -8,7 +8,7 @@ module.exports = defineConfig({
   reporter: [
     ['list'],
     ['html', { open: 'never' }],
-    ['json', { outputFile: 'results/e2e-results.json' }],
+    ['json', { outputFile: 'test-results/e2e-results.json' }],
   ],
   use: {
     baseURL: 'http://127.0.0.1:8137',
@@ -28,6 +28,7 @@ module.exports = defineConfig({
   ],
   webServer: {
     command: 'python server.py --port 8137',
+    cwd: '..',
     url: 'http://127.0.0.1:8137/api/health',
     reuseExistingServer: false,
     timeout: 30000,

@@ -1,5 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
+const path = require('node:path');
+const screenshots = path.resolve(__dirname, '../../../docs/screenshots');
 
 async function example(page, key) {
   await page.locator('#example').selectOption(key);
@@ -151,9 +153,9 @@ test('responsive layout is usable and JavaScript has no runtime errors', async (
   await page.getByRole('button', { name: 'Project guide' }).click();
   await expect(page.locator('#guide')).toContainText('a6');
   await page.getByRole('button', { name: 'Framework studio' }).click();
-  fs.mkdirSync('docs/screenshots', { recursive: true });
+  fs.mkdirSync(screenshots, { recursive: true });
   await page.screenshot({
-    path: `docs/screenshots/${testInfo.project.name}-studio.png`,
+    path: `${screenshots}/${testInfo.project.name}-studio.png`,
     fullPage: true,
   });
   expect(errors).toEqual([]);
